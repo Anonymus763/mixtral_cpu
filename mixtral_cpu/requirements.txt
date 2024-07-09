@@ -1,0 +1,6 @@
+fastapi
+pydantic~=2.7.0
+uvicorn
+loguru
+huggingface-hub
+llama-cpp-python
