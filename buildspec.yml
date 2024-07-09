@@ -9,7 +9,6 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - cd mixtral_cpu
       - docker build -t mixtral_cpu:dev --build-arg S3_BUCKET=mixtralbucket .
       - docker tag mixtral_cpu:dev 058264342822.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/rvrecht:dev
   post_build:
