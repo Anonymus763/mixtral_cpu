@@ -5,6 +5,9 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin 058264342822.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+      - echo Downloading model from S3...
+      - aws s3 cp s3://mixtralbucket/model.zip /tmp/model.zip
+      - unzip /tmp/model.zip -d /tmp/model && rm /tmp/model.zip
   build:
     commands:
       - echo Build started on `date`
