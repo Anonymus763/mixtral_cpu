@@ -6,13 +6,12 @@ phases:
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin 058264342822.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
       - echo Downloading model from S3...
-      - aws s3 cp s3://mixtralbucket/model.zip /tmp/model.zip
-      - unzip /tmp/model.zip -d /tmp/model && rm /tmp/model.zip
+      - aws s3 cp s3://mixtralbucket/mixtral-8x7b-instruct-v0.1.Q3_K_M.gguf /tmp/model.gguf
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t mixtral_cpu:dev --build-arg S3_BUCKET=mixtralbucket .
+      - docker build -t mixtral_cpu:dev .
       - docker tag mixtral_cpu:dev 058264342822.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/rvrecht:dev
   post_build:
     commands:
