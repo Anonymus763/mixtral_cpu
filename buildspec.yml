@@ -7,6 +7,7 @@ phases:
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin 058264342822.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
       - echo Downloading model from S3...
       - aws s3 cp s3://mixtralbucket/mixtral-8x7b-instruct-v0.1.Q3_K_M.gguf /tmp/model.gguf
+      - ls -lh /tmp  # Fügen Sie diesen Befehl hinzu, um sicherzustellen, dass die Datei heruntergeladen wurde
   build:
     commands:
       - echo Build started on `date`
@@ -22,4 +23,3 @@ artifacts:
   files:
     - '**/*'
   discard-paths: yes
-
