@@ -18,7 +18,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Kopiere das Modell, das im pre_build Schritt heruntergeladen wurde
-COPY /tmp/model.gguf /path/to/model/mixtral-8x7b-instruct-v0.1.Q3_K_M.gguf
+COPY /tmp/model.gguf /app/model/mixtral-8x7b-instruct-v0.1.Q3_K_M.gguf
 
 # Kopiere den Rest des Anwendungscodes
 COPY . .
