@@ -17,14 +17,8 @@ COPY requirements.txt .
 # Installiere die Abhängigkeiten
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Umgebungsvariablen für S3 Bucket und Modell-Datei
-ARG S3_BUCKET
-ARG MODEL_ZIP=model.zip
-
-# Download und Entpacken des Modells von S3
-RUN aws s3 cp s3://${S3_BUCKET}/${MODEL_ZIP} /tmp/model.zip && \
-    unzip /tmp/model.zip -d /path/to/model && \
-    rm /tmp/model.zip
+# Kopiere das Modell, das im pre_build Schritt heruntergeladen wurde
+COPY /tmp/model.gguf /path/to/model/mixtral-8x7b-instruct-v0.1.Q3_K_M.gguf
 
 # Kopiere den Rest des Anwendungscodes
 COPY . .
